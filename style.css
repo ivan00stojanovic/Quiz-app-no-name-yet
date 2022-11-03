@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    position: relative;
+    display: grid;
+    min-height: 100vh;
+    place-content: center;
+    justify-items: center;
+    background: rgb(187,214,223);
+background: linear-gradient(90deg, rgba(187,214,223,1) 33%, rgba(17,183,236,1) 52%, rgba(100,223,165,1) 71%, rgba(120,226,192,1) 98%);
+}
+
+h1 {
+    font-size: 40px;
+    text-align: center;
+}
+
+h3{
+    font-size: 20px;
+    text-align: center;
+}
+
+button{
+    font-size: 1.5rem;
+    margin-top: 30px;
+    width: 120px;
+    height: 70px;
+    border-radius: 9999px;
+    background-color: #ADF7B6;
+        
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: rgba(17,183,236,1) ;
+    color: white;
+}
+
+footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+a{
+    text-decoration: none;
+    font-size: 1rem;
+    color: white;
+    background-color: rgba(38, 38, 182, 0.765); 
+    border-radius: 30px;
+    padding: .3rem .5rem;
+}
+
+a:hover {
+    background-color: rgba(64, 76, 123, 0.765); 
+}
+
+@media only screen and (min-width: 768px){
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .2rem .3rem;
+        width: 200px;
+        font-size: 2.5rem;
+    }
+
+    a{
+        font-size: 2rem;
+        padding: .5rem 1rem;
+    }
+}
+
+/*1024*/
+@media only screen and (min-width: 1024px) {
+    h1{
+        font-size: 3.5rem;
+    }
+    h3{
+        font-size: 2.5rem;
+    }
+    button{
+        padding: 0.4rem 0.5rem;
+        font-size: 3rem;
+    }
+    a{
+        font-size: 2rem;
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 1440px){
+    h1{
+        font-size: 4.5rem;
+    }
+    h3{
+        font-size: 3.5rem;
+    }
+    button{
+        padding: 0.6rem 0.7rem;
+        font-size: 3.5rem;
+    }
+    a{
+        font-size: 3rem;
+        border-radius: 50px;
+    }
+}

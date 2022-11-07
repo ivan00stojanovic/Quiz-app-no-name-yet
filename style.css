@@ -19,13 +19,17 @@ background: linear-gradient(90deg, rgba(187,214,223,1) 33%, rgba(17,183,236,1) 5
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
 }
 
 h3{
     font-size: 20px;
     text-align: center;
+}
+
+.visibility {
+    display: none;
 }
 
 button{
@@ -44,6 +48,33 @@ button:hover{
     color: white;
 }
 
+section{
+    /* margin-top: 100px; */ 
+}
+
+ul{ 
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-content: center;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+li{
+    margin: 20px; 
+}
+
+li button{
+    background-color:rgba(17,183,236,1) ;
+    color: white;
+}
+
+.option:hover{
+    background-color: #ADF7B6;
+    color: black;
+}
+
 footer{
     width: 100%;
     position: fixed;
@@ -58,14 +89,14 @@ footer{
 a{
     text-decoration: none;
     font-size: 1rem;
-    color: white;
-    background-color: rgba(38, 38, 182, 0.765); 
+    color: black;
+    /*background-color: rgba(38, 38, 182, 0.765); */
     border-radius: 30px;
     padding: .3rem .5rem;
 }
 
 a:hover {
-    background-color: rgba(64, 76, 123, 0.765); 
+    background-color: #ADF7B6;
 }
 
 @media only screen and (min-width: 768px){

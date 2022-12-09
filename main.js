@@ -119,4 +119,4 @@ button.addEventListener('click', apiRequest)
 //store score in localstorage
 //fix it to total of 10 questions at first
 //when finished show total correct out of 10
-//give user chance to redo quiz
+//give user chance to redo quiz after the end

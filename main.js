@@ -3,7 +3,7 @@
 //for the question pull the city and country randomly together
 //for the answers pull 3 random cities
 //after getting the JSON 
-// let cities = []
+//let cities = []
 //Math.random() * 3
 
 const button = document.getElementById('btn')
@@ -19,7 +19,14 @@ async function apiRequest(){
         const response = await fetch(`https://countriesnow.space/api/v0.1/countries/capital`)
         const data = await response.json()
         let list = data.data
-        console.log(list)
+        // console.log(list)
+
+        let listOfCountryNames = list.reduce((acc, cur) => {
+            acc[cur.name] = cur;
+            return acc;
+        }, [])
+
+        console.log(listOfCountryNames)
 
         let countries = list.reduce((acc, cur) => {
             acc[cur.name] = cur;
@@ -32,13 +39,14 @@ async function apiRequest(){
         }, [])
         
         countries = Object.keys(countries).sort()//choose 1 random
-        capitals = Object.keys(capitals).sort()//from this arry choose 3 random
+        capitals = Object.keys(capitals).sort()//from this array choose 3 random
 
-        console.log(capitals)
+        console.log(countries)
 
-         countriesOnly = countries;
-         printCountryData(countries[Math.floor(Math.random() * 251)])
-         capitalsOnly = capitals;
+         
+         let randomCountry = countries[Math.floor(Math.random() * 251)]
+         printCountryData(randomCountry)
+         getAnswer(randomCountry, listOfCountryNames)
          getRandomThree(capitals)
         
     }catch(error){
@@ -46,23 +54,34 @@ async function apiRequest(){
     }
 }
 
+const getAnswer = function(randomCountry, countriesInfo){
+    let answer = countriesInfo[randomCountry].capital
+    return answer
+}
+
+
+
+
  const printCountryData = country => {
      document.getElementById('h1').innerText = `What is the capital of ${country}?`
      const h3 = document.getElementById('h3');
      const answers = document.getElementById('answers')
      h3.classList.add('visibility')
      answers.classList.remove('visibility')
-     
+
  } 
 
  const getRandomThree = capitalsArr => {
     let randomThreeArr = []
     while(randomThreeArr.length < 3){
         //let randomOne = capitalsArr[Math.floor(Math.random()) * 243]
-        randomThreeArr.push(capitalsOnly[Math.floor(Math.random() * 243)])
+        randomThreeArr.push(capitalsArr[Math.floor(Math.random() * 243)])
     }
-        
+    randomThreeArr.push(getAnswer())
     console.log(randomThreeArr)
+
+        
+    // console.log(randomThreeArr)
     printCapitalData(randomThreeArr)
  }
 
@@ -74,7 +93,11 @@ async function apiRequest(){
     optionOne.innerText = capitalsArr[0]
     optionTwo.innerText = capitalsArr[1]
     optionThree.innerText = capitalsArr[2]
+
 }
+
+
+
 
 
 
@@ -83,8 +106,13 @@ button.addEventListener('click', apiRequest)
 
 
 //do separate fetch and rearrange data so it's listed by country name first
+
+
+
 //loop through the data and match country name to the country randomly pulled
+
 //pull the capital city and save to variable
+
 //add this capital to random capitalsArr so length is 4
 //randomly populate the answers buttons
 //build score tracker

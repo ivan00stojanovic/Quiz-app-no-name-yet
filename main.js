@@ -2,7 +2,6 @@ const button = document.getElementById('btn')
 const options = document.querySelectorAll('.option')
 let score = 0;
 
-
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
 
 async function apiRequest(){
@@ -38,6 +37,7 @@ async function apiRequest(){
          //get one random country name from countries array
          let randomCountry = countries[Math.floor(Math.random() * 251)]
 
+         //gettin the correct answer first
          var answer = listOfCountryNames[randomCountry].capital
 
          let randomThreeArr = []
@@ -51,6 +51,24 @@ async function apiRequest(){
          //pass the one random country into printCountryData function
          printCountryData(randomCountry)
          shuffleAnswers(answerOptions)
+        
+    
+        //increments the score if the correct answer is clicked, NOTE: need to work on letting the user know that the answer is correct
+        //for each btn adding an event listener to grab text and compare
+        //to the answer previously defined
+        //NOTE: issue with duplicates in console log when game is
+        //restarted
+         options.forEach((option) => {
+            option.addEventListener('click', (e) => {
+                console.log(e.target.innerText === answer)
+                if(e.target.innerText === answer) {
+                    score++
+                    console.log(score)
+                   // option.style.color = 'green'
+                }
+            })
+        })
+
     }catch(error){
         console.log(error)
     }
@@ -82,8 +100,11 @@ async function apiRequest(){
     optionFour.innerText = capitalsArr[3]   
 }
 
-
 button.addEventListener('click', apiRequest)
+
+
+
+
 
 //do separate fetch and rearrange data so it's listed by country name first
 

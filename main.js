@@ -1,8 +1,12 @@
 const button = document.getElementById('btn')
 const options = document.querySelectorAll('.option')
 let score = 0;
+let questionAnswer;
+let testing = 0 
 
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
+
+
 
 async function apiRequest(){
     try{
@@ -47,7 +51,7 @@ async function apiRequest(){
         //spread
         let answerOptions = [...randomThreeArr]
         answerOptions.push(answer)
-
+        
          //pass the one random country into printCountryData function
          printCountryData(randomCountry)
          shuffleAnswers(answerOptions)
@@ -60,15 +64,21 @@ async function apiRequest(){
         //restarted
          options.forEach((option) => {
             option.addEventListener('click', (e) => {
-                console.log(e.target.innerText === answer)
-                if(e.target.innerText === answer) {
+                if(e.target.innerText === answer){
+                    e.target.style.background = 'green'
                     score++
-                    console.log(score)
-                   // option.style.color = 'green'
+                }else{
+                   e.target.style.background = 'red'
                 }
+                    if(testing > 1) option.style.background = ''
             })
-        })
+        })         
+         button.innerText = 'Next Question'
 
+         
+        
+          //  testing++
+          //  console.log(testing)
     }catch(error){
         console.log(error)
     }
@@ -107,21 +117,21 @@ button.addEventListener('click', apiRequest)
 
 
 //do separate fetch and rearrange data so it's listed by country name first
-
+//
 //loop through the data and match country name to the country randomly pulled
-
+//
 //pull the capital city and save to variable
-
+//
 //add this capital to random capitalsArr so length is 4
-
+//
 //randomly populate the answers buttons
-
+//
 //build score tracker
-
+//
 //store score in localstorage
-
+//
 //fix it to total of 10 questions at first
-
+//
 //when finished show total correct out of 10
-
+//
 //give user chance to redo quiz after the end

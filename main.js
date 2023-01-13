@@ -72,7 +72,7 @@ async function apiRequest(){
         //NOTE: issue with duplicates in console log when game is
         //restarted
 
-        //NOTE!
+        //NOTE! ASK WHAT WAS WRONG, LET MEG KNOW THE "NEXT QUESTION SPAM" PROBLEM
         counter++
          options.forEach((option) => {
             option.addEventListener('click', (e) => {

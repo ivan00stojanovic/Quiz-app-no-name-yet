@@ -122,7 +122,21 @@ a:hover {
         justify-content: end;
         flex-direction: row;
     }
-
+    @keyframes advancedScoreAnimation {
+       
+        0% {
+            transform: translateX(-20px);
+            opacity: 0;
+          }
+          20% {
+            transform: translateX(-20px);
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(-0px);
+            opacity: 0.5;
+          }
+      }
     .score{
             display: flex;
             justify-content: start;
@@ -130,6 +144,7 @@ a:hover {
             margin-left: 0px;
             flex-direction: row;   
             font-size: 1.5rem;
+            animation: advancedScoreAnimation 1s forwards; 
         }
     }
 

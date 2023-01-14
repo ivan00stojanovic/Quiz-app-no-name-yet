@@ -2,7 +2,13 @@ const button = document.getElementById('btn')
 const options = document.querySelectorAll('.option')
 let score = 0;
 let questionAnswer;
-let testing = 0 
+const optionOne = document.getElementById('1')
+const optionTwo = document.getElementById('2')
+const optionThree = document.getElementById('3')
+const optionFour = document.getElementById('4')
+
+const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
+
 
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
 
@@ -63,22 +69,40 @@ async function apiRequest(){
         //NOTE: issue with duplicates in console log when game is
         //restarted
          options.forEach((option) => {
+            let counter = 0
             option.addEventListener('click', (e) => {
                 if(e.target.innerText === answer){
                     e.target.style.background = 'green'
+                   
                     score++
+                    counter++
+                    //disables the use of other options when the user answers
+                    optionsArray.forEach(option => option.disabled = true)
                 }else{
                    e.target.style.background = 'red'
+                    counter++ 
+                    //disables the use of other options when the user answers
+                    optionsArray.forEach(option => option.disabled = true)
                 }
-                    if(testing > 1) option.style.background = ''
             })
-        })         
+        })   
+        console.log(score)
+
+        // gives the buttons their functionality back after the apiRequest function is ran again
+        optionsArray.forEach(option => option.disabled = false)
+    
+        
          button.innerText = 'Next Question'
 
+          //optionOne.style.background = ''
+          //optionTwo.style.background = ''
+          //optionThree.style.background = ''  
+          //optionFour.style.background = '' 
+          optionsArray.forEach(option => option.style.background = '')
+
+          
+
          
-        
-          //  testing++
-          //  console.log(testing)
     }catch(error){
         console.log(error)
     }
@@ -100,10 +124,10 @@ async function apiRequest(){
 
 //fill the option slots with text
  const printCapitalData = capitalsArr => {
-    const optionOne = document.getElementById('1')
-    const optionTwo = document.getElementById('2')
-    const optionThree = document.getElementById('3')
-    const optionFour = document.getElementById('4')
+   const optionOne = document.getElementById('1')
+   const optionTwo = document.getElementById('2')
+   const optionThree = document.getElementById('3')
+   const optionFour = document.getElementById('4')
     optionOne.innerText = capitalsArr[0]
     optionTwo.innerText = capitalsArr[1]
     optionThree.innerText = capitalsArr[2]

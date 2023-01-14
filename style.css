@@ -37,9 +37,13 @@ button{
     margin-top: 30px;
     width: 120px;
     height: 70px;
-    border-radius: 9999px;
+    border-radius: 99px;
     background-color: #ADF7B6;
-        
+    
+}
+
+#btn {
+    width: fit-content;
 }
 
 button:hover{

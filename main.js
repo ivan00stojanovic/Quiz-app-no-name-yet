@@ -1,11 +1,14 @@
 const button = document.getElementById('btn')
 const options = document.querySelectorAll('.option')
-let score = 0;
+let score = document.querySelector('.score');
+let showScore = document.querySelector('.class')
 let questionAnswer;
 const optionOne = document.getElementById('1')
 const optionTwo = document.getElementById('2')
 const optionThree = document.getElementById('3')
 const optionFour = document.getElementById('4')
+let correctOnes = 0;
+let counter = 0;
 
 const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
 
@@ -68,25 +71,30 @@ async function apiRequest(){
         //to the answer previously defined
         //NOTE: issue with duplicates in console log when game is
         //restarted
+
+        //NOTE!
+        counter++
          options.forEach((option) => {
-            let counter = 0
             option.addEventListener('click', (e) => {
                 if(e.target.innerText === answer){
                     e.target.style.background = 'green'
-                   
-                    score++
-                    counter++
+                    correctOnes++
+                    //counter++
+                    score.innerText = correctOnes + '/' + counter
                     //disables the use of other options when the user answers
                     optionsArray.forEach(option => option.disabled = true)
                 }else{
                    e.target.style.background = 'red'
-                    counter++ 
+                   //counter++
+                   score.innerText = correctOnes + '/' + counter
                     //disables the use of other options when the user answers
                     optionsArray.forEach(option => option.disabled = true)
                 }
             })
         })   
-        console.log(score)
+        console.log(correctOnes + '  corrects')
+        console.log(counter + '  wrongs')
+    
 
         // gives the buttons their functionality back after the apiRequest function is ran again
         optionsArray.forEach(option => option.disabled = false)

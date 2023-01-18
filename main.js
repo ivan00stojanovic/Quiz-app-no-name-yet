@@ -13,6 +13,10 @@ let counter = 0;
 const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
 
 
+
+
+
+
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
 
 
@@ -81,34 +85,32 @@ async function apiRequest(){
                     correctOnes++
                     //counter++
                     score.innerText = correctOnes + '/' + counter
+                    score.style.setProperty('animation', 'correct 500ms ease')
                     //disables the use of other options when the user answers
                     optionsArray.forEach(option => option.disabled = true)
                 }else{
                    e.target.style.background = 'red'
                    //counter++
-                   score.innerText = correctOnes + '/' + counter
+                   score.innerText = correctOnes + '/' + counter 
+                   //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
+                   score.style.setProperty('animation', 'wrong 700ms ease')
                     //disables the use of other options when the user answers
                     optionsArray.forEach(option => option.disabled = true)
                 }
             })
         })   
-        console.log(correctOnes + '  corrects')
-        console.log(counter + '  wrongs')
     
-
         // gives the buttons their functionality back after the apiRequest function is ran again
         optionsArray.forEach(option => option.disabled = false)
     
         
          button.innerText = 'Next Question'
 
-          //optionOne.style.background = ''
-          //optionTwo.style.background = ''
-          //optionThree.style.background = ''  
-          //optionFour.style.background = '' 
+          //returns every options' original bg after the user goes to the next question
           optionsArray.forEach(option => option.style.background = '')
 
-          
+        //removes the animation property so that it can be applied after every question click
+          score.style.removeProperty('animation')
 
          
     }catch(error){
@@ -124,6 +126,8 @@ async function apiRequest(){
      answers.classList.remove('visibility')
 
  }
+
+ 
 
  const shuffleAnswers = answerOptions => {
     let shuffled = answerOptions.sort((a, b) => 0.5 - Math.random())

@@ -270,7 +270,7 @@ a:hover {
     }
     span{
         margin-left: 800px;
-        font-size: 1.5rem;
+        font-size: 2rem;
         display: flex;
         align-items: flex-end;
         justify-content: end;
@@ -283,6 +283,6 @@ a:hover {
             align-items: flex-end;
             margin-left: 0px;
             flex-direction: column;   
-            font-size: 1.5rem;
+            font-size: 2.5rem;
         }
     }

@@ -20,8 +20,12 @@ const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
 
 
+//const hideBtn = () => {
+//button.classList.add("hide");
+//}
 
 async function apiRequest(){
+    console.log(`counter after clicking next question ${counter}`)
     try{
         //fetch data from URL
         const response = await fetch(`https://countriesnow.space/api/v0.1/countries/capital`)
@@ -75,27 +79,27 @@ async function apiRequest(){
         //to the answer previously defined
         //NOTE: issue with duplicates in console log when game is
         //restarted
-
         //NOTE! ASK WHAT WAS WRONG, LET MEG KNOW THE "NEXT QUESTION SPAM" PROBLEM
         counter++
          options.forEach((option) => {
             option.addEventListener('click', (e) => {
+                button.classList.remove('hide')  
+
                 if(e.target.innerText === answer){
                     e.target.style.background = 'green'
                     correctOnes++
-                    //counter++
                     score.innerText = correctOnes + '/' + counter
-                    score.style.setProperty('animation', 'correct 500ms ease')
+                    score.style.setProperty('animation', 'correct 500ms ease')              
                     //disables the use of other options when the user answers
                     optionsArray.forEach(option => option.disabled = true)
                 }else{
-                   e.target.style.background = 'red'
-                   //counter++
-                   score.innerText = correctOnes + '/' + counter 
-                   //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
-                   score.style.setProperty('animation', 'wrong 700ms ease')
+                    e.target.style.background = 'red'
+                    score.innerText = correctOnes + '/' + counter 
+                    //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
+                    score.style.setProperty('animation', 'wrong 700ms ease')       
                     //disables the use of other options when the user answers
                     optionsArray.forEach(option => option.disabled = true)
+                    
                 }
             })
         })   
@@ -118,13 +122,14 @@ async function apiRequest(){
     }
 }
 
+
+
  const printCountryData = country => {
      document.getElementById('h1').innerText = `What is the capital of ${country}?`
      const h3 = document.getElementById('h3');
      const answers = document.getElementById('answers')
      h3.classList.add('visibility')
      answers.classList.remove('visibility')
-
  }
 
  
@@ -146,7 +151,10 @@ async function apiRequest(){
     optionFour.innerText = capitalsArr[3]   
 }
 
-button.addEventListener('click', apiRequest)
+button.addEventListener('click', () => {
+    //hideBtn()
+    apiRequest()
+})
 
 
 

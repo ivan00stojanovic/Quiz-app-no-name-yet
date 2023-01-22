@@ -47,6 +47,10 @@ button{
     width: fit-content;
 }
 
+.hide {
+    display: none;
+}
+
 button:hover{
     cursor: pointer;
     background-color: rgba(17,183,236,1) ;
@@ -84,6 +88,7 @@ footer{
     left: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
     padding: 1rem 0;
 }

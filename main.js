@@ -20,11 +20,15 @@ const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
 
 
-//const hideBtn = () => {
-//button.classList.add("hide");
-//}
+const hideBtn = () => {
+button.classList.add("hide");
+button.style.setProperty('animation', 'reappear 350ms ease')
+}
 
 async function apiRequest(){
+    //button.classList.add('hide')
+    hideBtn()
+    
     console.log(`counter after clicking next question ${counter}`)
     try{
         //fetch data from URL
@@ -96,7 +100,7 @@ async function apiRequest(){
                     e.target.style.background = 'red'
                     score.innerText = correctOnes + '/' + counter 
                     //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
-                    score.style.setProperty('animation', 'wrong 700ms ease')       
+                    score.style.setProperty('animation', 'wrong 700ms ease')
                     //disables the use of other options when the user answers
                     optionsArray.forEach(option => option.disabled = true)
                     

@@ -13,11 +13,10 @@ let counter = 0;
 const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
 
 
-
-
-
-
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
+
+
+
 
 
 const hideBtn = () => {
@@ -25,9 +24,28 @@ button.classList.add("hide");
 button.style.setProperty('animation', 'reappear 350ms ease')
 }
 
+const checkCounter = () => {
+    if(counter > 8){
+        button.innerText = 'Reset game'
+        optionsArray.forEach(option => option.disabled = true)
+    button.addEventListener('click', () => {
+        counter = 0
+        score.innerText = correctOnes + '/' + counter
+        correctOnes= 0
+        apiRequest()
+    })
+}
+}
+
+
 async function apiRequest(){
-    //button.classList.add('hide')
+    button.innerText = 'Next Question'
+    if(counter === 9){
+        button.innerHTML = 'reset game'
+    }
+    // checkCounter()
     hideBtn()
+
     
     console.log(`counter after clicking next question ${counter}`)
     try{
@@ -84,35 +102,38 @@ async function apiRequest(){
         //NOTE: issue with duplicates in console log when game is
         //restarted
         //NOTE! ASK WHAT WAS WRONG, LET MEG KNOW THE "NEXT QUESTION SPAM" PROBLEM
+       
         counter++
-         options.forEach((option) => {
+        options.forEach((option) => {
             option.addEventListener('click', (e) => {
                 button.classList.remove('hide')  
-
-                if(e.target.innerText === answer){
-                    e.target.style.background = 'green'
-                    correctOnes++
-                    score.innerText = correctOnes + '/' + counter
-                    score.style.setProperty('animation', 'correct 500ms ease')              
-                    //disables the use of other options when the user answers
-                    optionsArray.forEach(option => option.disabled = true)
-                }else{
-                    e.target.style.background = 'red'
-                    score.innerText = correctOnes + '/' + counter 
-                    //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
-                    score.style.setProperty('animation', 'wrong 700ms ease')
-                    //disables the use of other options when the user answers
-                    optionsArray.forEach(option => option.disabled = true)
-                    
-                }
+                    if(e.target.innerText === answer){
+                        e.target.style.background = 'green'
+                        correctOnes++
+                        score.innerText = correctOnes + '/' + counter
+                        score.style.setProperty('animation', 'correct 500ms ease')              
+                        //disables the use of other options when the user answers
+                        optionsArray.forEach(option => option.disabled = true)
+                    }else{
+                        e.target.style.background = 'red'
+                        score.innerText = correctOnes + '/' + counter 
+                        //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
+                        score.style.setProperty('animation', 'wrong 700ms ease')
+                        //disables the use of other options when the user answers
+                        optionsArray.forEach(option => option.disabled = true)
+                    }
             })
-        })   
+        }) 
+        
+        
+
+         
     
         // gives the buttons their functionality back after the apiRequest function is ran again
         optionsArray.forEach(option => option.disabled = false)
     
         
-         button.innerText = 'Next Question'
+         //button.innerText = 'Next Question'
 
           //returns every options' original bg after the user goes to the next question
           optionsArray.forEach(option => option.style.background = '')
@@ -125,7 +146,6 @@ async function apiRequest(){
         console.log(error)
     }
 }
-
 
 
  const printCountryData = country => {
@@ -156,7 +176,6 @@ async function apiRequest(){
 }
 
 button.addEventListener('click', () => {
-    //hideBtn()
     apiRequest()
 })
 

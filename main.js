@@ -48,6 +48,8 @@ let countdown =  () => {
      clearInterval(countdown);
      timer.innerText = 'Yikes, out of time'
      optionsArray.forEach(option => option.disabled = true)
+     button.classList.remove('hide')
+     
     }    
 };
 
@@ -134,6 +136,8 @@ async function apiRequest(){
                         score.style.setProperty('animation', 'correct 500ms ease')              
                         //disables the use of other options when the user answers
                         optionsArray.forEach(option => option.disabled = true)
+                        //clearInterval(countdown)
+                        //timerCounter = 30;
                     }else{
                         e.target.style.background = 'red'
                         score.innerText = correctOnes + ' / ' + counter 
@@ -141,6 +145,8 @@ async function apiRequest(){
                         score.style.setProperty('animation', 'wrong 700ms ease')
                         //disables the use of other options when the user answers
                         optionsArray.forEach(option => option.disabled = true)
+                        //clearInterval(countdown)
+                        //timerCounter = 30;
                     }
             })
         }) 

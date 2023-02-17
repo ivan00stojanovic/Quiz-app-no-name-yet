@@ -7,9 +7,11 @@ const optionOne = document.getElementById('1')
 const optionTwo = document.getElementById('2')
 const optionThree = document.getElementById('3')
 const optionFour = document.getElementById('4')
+let timer = document.querySelector('.timer')
+let timerCounter = 30;
 let correctOnes = 0;
 let counter = 0;
-
+//let numQ = 10;
 const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
 
 
@@ -30,7 +32,8 @@ const checkCounter = () => {
         optionsArray.forEach(option => option.disabled = true)
     button.addEventListener('click', () => {
         counter = 0
-        score.innerText = correctOnes + '/' + counter
+        correctOnes  = 0
+        score.innerText = correctOnes + ' / ' + counter
         correctOnes= 0
         apiRequest()
     })
@@ -38,14 +41,29 @@ const checkCounter = () => {
 }
 
 
+let countdown =  () => {
+    timerCounter--;
+    timer.innerText = timerCounter;
+    if(timerCounter < 0 ){
+     clearInterval(countdown);
+     timer.innerText = 'Yikes, out of time'
+     optionsArray.forEach(option => option.disabled = true)
+    }    
+};
+
+
 async function apiRequest(){
     button.innerText = 'Next Question'
-    if(counter === 9){
-        button.innerHTML = 'reset game'
-    }
-    // checkCounter()
+    //if(counter === 9){
+    //    button.innerHTML = 'reset game'
+    //}
+     checkCounter()
     hideBtn()
 
+    setInterval(countdown, 1000)
+
+    
+    
     
     console.log(`counter after clicking next question ${counter}`)
     try{
@@ -103,6 +121,8 @@ async function apiRequest(){
         //restarted
         //NOTE! ASK WHAT WAS WRONG, LET MEG KNOW THE "NEXT QUESTION SPAM" PROBLEM
        
+        
+
         counter++
         options.forEach((option) => {
             option.addEventListener('click', (e) => {
@@ -110,13 +130,13 @@ async function apiRequest(){
                     if(e.target.innerText === answer){
                         e.target.style.background = 'green'
                         correctOnes++
-                        score.innerText = correctOnes + '/' + counter
+                        score.innerText = correctOnes + ' / ' + counter
                         score.style.setProperty('animation', 'correct 500ms ease')              
                         //disables the use of other options when the user answers
                         optionsArray.forEach(option => option.disabled = true)
                     }else{
                         e.target.style.background = 'red'
-                        score.innerText = correctOnes + '/' + counter 
+                        score.innerText = correctOnes + ' / ' + counter 
                         //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
                         score.style.setProperty('animation', 'wrong 700ms ease')
                         //disables the use of other options when the user answers
@@ -146,6 +166,8 @@ async function apiRequest(){
         console.log(error)
     }
 }
+
+
 
 
  const printCountryData = country => {
@@ -178,9 +200,6 @@ async function apiRequest(){
 button.addEventListener('click', () => {
     apiRequest()
 })
-
-
-
 
 
 //do separate fetch and rearrange data so it's listed by country name first

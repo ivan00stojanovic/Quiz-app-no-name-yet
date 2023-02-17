@@ -8,7 +8,8 @@ const optionTwo = document.getElementById('2')
 const optionThree = document.getElementById('3')
 const optionFour = document.getElementById('4')
 let timer = document.querySelector('.timer')
-let timerCounter = 30;
+let slider = document.getElementById('slider')
+let timerCounter = 20;
 let correctOnes = 0;
 let counter = 0;
 //let numQ = 10;
@@ -17,13 +18,10 @@ const optionsArray = [optionOne, optionTwo, optionThree, optionFour]
 
 //https://countriesnow.space/api/v0.1/countries/cities this is country names API
 
-
-
-
-
 const hideBtn = () => {
 button.classList.add("hide");
 button.style.setProperty('animation', 'reappear 350ms ease')
+
 }
 
 const checkCounter = () => {
@@ -34,38 +32,43 @@ const checkCounter = () => {
         counter = 0
         correctOnes  = 0
         score.innerText = correctOnes + ' / ' + counter
-        correctOnes= 0
-        apiRequest()
+        //apiRequest()
     })
 }
 }
 
-
 let countdown =  () => {
     timerCounter--;
     timer.innerText = timerCounter;
-    if(timerCounter < 0 ){
+    if(timerCounter <= 0 ){
      clearInterval(countdown);
      timer.innerText = 'Yikes, out of time'
-     optionsArray.forEach(option => option.disabled = true)
+     slider.style.display = 'none'
      button.classList.remove('hide')
+     optionsArray.forEach(option => option.disabled = true)
      
     }    
 };
 
 
 async function apiRequest(){
+    timer.innerText = timerCounter;
     button.innerText = 'Next Question'
+    slider.style.animation = 'slider-animation 20s linear'
+    
     //if(counter === 9){
     //    button.innerHTML = 'reset game'
     //}
-     checkCounter()
+    checkCounter()
     hideBtn()
+    const squareOne = setInterval(countdown, 1000)
 
-    setInterval(countdown, 1000)
-
-    
-    
+    const backTo20 = () => {
+        clearInterval(squareOne)
+        timerCounter = 20;
+        slider.style.display = 'none'
+        slider.style.removeProperty = 'animation'
+    }
     
     console.log(`counter after clicking next question ${counter}`)
     try{
@@ -136,17 +139,15 @@ async function apiRequest(){
                         score.style.setProperty('animation', 'correct 500ms ease')              
                         //disables the use of other options when the user answers
                         optionsArray.forEach(option => option.disabled = true)
-                        //clearInterval(countdown)
-                        //timerCounter = 30;
+                       backTo20()
                     }else{
                         e.target.style.background = 'red'
                         score.innerText = correctOnes + ' / ' + counter 
                         //NOTE!! wrong answer animation didn't run on consecutive wrong answers before i removed the animation property on line 116
-                        score.style.setProperty('animation', 'wrong 700ms ease')
+                        score.style.setProperty('animation', 'wrong 600ms ease')
                         //disables the use of other options when the user answers
                         optionsArray.forEach(option => option.disabled = true)
-                        //clearInterval(countdown)
-                        //timerCounter = 30;
+                        backTo20()
                     }
             })
         }) 
@@ -166,6 +167,7 @@ async function apiRequest(){
 
         //removes the animation property so that it can be applied after every question click
           score.style.removeProperty('animation')
+          
 
          
     }catch(error){

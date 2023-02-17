@@ -14,18 +14,25 @@ body {
     min-height: 100vh;
     place-content: center;
     justify-items: center;
-    background: rgb(187,214,223);
-background: linear-gradient(90deg, rgba(187,214,223,1) 33%, rgba(17,183,236,1) 52%, rgba(100,223,165,1) 71%, rgba(120,226,192,1) 98%);
+   /* background: rgb(187,214,223);
+    background: linear-gradient(90deg, rgba(187,214,223,1) 33%, rgba(17,183,236,1) 52%, rgba(100,223,165,1) 71%, rgba(120,226,192,1) 98%); */
+    background-image: url(https://www.nationsonline.org/maps/Political-World-Map-3360.jpg);
+    background-size: cover;
+    
 }
 
 h1 {
     font-size: 35px;
     text-align: center;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
 }
 
 h3{
     font-size: 20px;
     text-align: center;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
 }
 
 .visibility {
@@ -40,6 +47,7 @@ button{
     border-radius: 99px;
     background-color: #ADF7B6;
     transition: all 300ms ease;
+    backdrop-filter: blur(10px);
 }
 
 #btn {
@@ -162,6 +170,34 @@ li button{
     border: 2px solid #ADF7B6;
     border-radius: 100%;
     padding: 0.3rem;
+  }
+
+  #slider {
+    width: 500px;
+    height: 10px;
+    margin-top: 20px;
+    background-color: rgba(10, 127, 204, 1);
+    position: relative;
+    border-radius: 20px;    
+  }
+  
+  /*#slider {
+    width: 500px;
+    height: 10px;
+    background-color: #f00;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: slider-animation 30s linear forwards;
+  } */
+  
+  @keyframes slider-animation {
+    0% {
+        width: 500px;
+    }
+    100% {
+        width: 0px;
+    }
   }
 
 footer{
